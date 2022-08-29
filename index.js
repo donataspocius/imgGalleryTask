@@ -37,9 +37,64 @@ let imgs = [
   },
 ];
 
-document.addEventListener("DOMContentLoaded", function (e) {
-  imgs.forEach((img) => 
-  document.createElement("img");
-  
-  );
+imgs.forEach(function (image) {
+  let img = document.createElement("img");
+  document.querySelector("#app").appendChild(img);
+  img.setAttribute("src", image.src);
+  img.setAttribute("alt", image.alt);
+  img.setAttribute("width", 200);
 });
+
+document.querySelectorAll("img").forEach((image) =>
+  image.addEventListener("click", function (e) {
+    let selectedImgIndex = null;
+    // HOW TO FIND INDEX USING INDEXOF?
+    for (let i = 0; i < imgs.length; i++) {
+      if (e.target.src === imgs[i].src) {
+        selectedImgIndex = i;
+      }
+    }
+    renderImg(selectedImgIndex);
+    navigation();
+  })
+);
+
+function renderImg(index) {
+  if (document.querySelector(".container")) {
+    document.querySelector(".container").remove();
+  }
+
+  let container = document.createElement("div");
+  container.setAttribute("class", "container");
+  document.querySelector("#app").appendChild(container);
+
+  let prevBtn = document.createElement("img");
+  document.querySelector(".container").appendChild(prevBtn);
+  prevBtn.setAttribute("class", "navBtn prev");
+  prevBtn.setAttribute("src", "./arrow.svg");
+  prevBtn.setAttribute("alt", "prev");
+
+  let selectedImg = document.createElement("img");
+  document.querySelector(".container").appendChild(selectedImg);
+  selectedImg.setAttribute("class", "selected-img");
+  selectedImg.setAttribute("src", imgs[index].src);
+  selectedImg.setAttribute("alt", imgs[index].alt);
+
+  let nextBtn = document.createElement("img");
+  document.querySelector(".container").appendChild(nextBtn);
+  nextBtn.setAttribute("class", "navBtn next");
+  nextBtn.setAttribute("src", "./arrow.svg");
+  nextBtn.setAttribute("alt", "next");
+  // document.querySelector("#app").style.filter = "blur(10px)";
+}
+
+function navigation() {
+  document.querySelector(".navBtn").addEventListener("click", function (e) {
+    console.log("e.target");
+    // switch (e.target.alt) {
+    //   case "prev": {
+    //     console.log("hello, world");
+    //   }
+    // }
+  });
+}

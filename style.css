@@ -1,0 +1,38 @@
+#app {
+  position: relative;
+  margin: 0 auto;
+  max-width: 640px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  justify-items: center;
+  background-color: bisque;
+}
+
+.selected-img {
+  position: absolute;
+  /* justify-content: center;
+  align-items: center; */
+  top: 10%;
+  left: 10%;
+  height: 500px;
+}
+
+.container {
+  height: 100px;
+}
+
+.prev {
+  position: absolute;
+  height: 58px;
+  top: 40%;
+  left: -0.5%;
+  rotate: 180deg;
+  z-index: 5;
+}
+.next {
+  position: absolute;
+  height: 58px;
+  top: 40%;
+  right: -0.5%;
+}
