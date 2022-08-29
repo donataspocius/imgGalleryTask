@@ -37,27 +37,18 @@ let imgs = [
   },
 ];
 
-imgs.forEach(function (image) {
+imgs.forEach(function (image, index) {
   let img = document.createElement("img");
   document.querySelector("#app").appendChild(img);
   img.setAttribute("src", image.src);
   img.setAttribute("alt", image.alt);
   img.setAttribute("width", 200);
+  img.addEventListener("click", function (e) {
+    console.log(index);
+    renderImg(index);
+    arrowNav();
+  });
 });
-
-document.querySelectorAll("img").forEach((image) =>
-  image.addEventListener("click", function (e) {
-    let selectedImgIndex = null;
-    // HOW TO FIND INDEX USING INDEXOF?
-    for (let i = 0; i < imgs.length; i++) {
-      if (e.target.src === imgs[i].src) {
-        selectedImgIndex = i;
-      }
-    }
-    renderImg(selectedImgIndex);
-    navigation();
-  })
-);
 
 function renderImg(index) {
   if (document.querySelector(".container")) {
@@ -88,13 +79,20 @@ function renderImg(index) {
   // document.querySelector("#app").style.filter = "blur(10px)";
 }
 
-function navigation() {
-  document.querySelector(".navBtn").addEventListener("click", function (e) {
-    console.log("e.target");
-    // switch (e.target.alt) {
-    //   case "prev": {
-    //     console.log("hello, world");
-    //   }
-    // }
+function arrowNav() {
+  document.querySelectorAll(".navBtn").forEach((el) => {
+    el.addEventListener("click", function (e) {
+      switch (e.target.alt) {
+        case "prev": {
+          console.log("prev");
+          break;
+        }
+
+        case "next": {
+          console.log("next");
+          break;
+        }
+      }
+    });
   });
 }
