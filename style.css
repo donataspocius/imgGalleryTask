@@ -27,8 +27,8 @@
   height: 58px;
   top: 40%;
   left: -0.5%;
-  rotate: 180deg;
-  z-index: 5;
+  /* rotate: 180deg; */
+  /* z-index: 99; */
 }
 .next {
   position: absolute;

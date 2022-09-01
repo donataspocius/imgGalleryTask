@@ -38,15 +38,16 @@ let imgs = [
 ];
 
 imgs.forEach(function (image, index) {
+  let selectedImg;
   let img = document.createElement("img");
   document.querySelector("#app").appendChild(img);
   img.setAttribute("src", image.src);
   img.setAttribute("alt", image.alt);
   img.setAttribute("width", 200);
   img.addEventListener("click", function (e) {
-    console.log(index);
+    // console.log(index);
     renderImg(index);
-    arrowNav();
+    arrowNav(index);
   });
 });
 
@@ -65,7 +66,7 @@ function renderImg(index) {
   prevBtn.setAttribute("src", "./arrow.svg");
   prevBtn.setAttribute("alt", "prev");
 
-  let selectedImg = document.createElement("img");
+  selectedImg = document.createElement("img");
   document.querySelector(".container").appendChild(selectedImg);
   selectedImg.setAttribute("class", "selected-img");
   selectedImg.setAttribute("src", imgs[index].src);
@@ -79,17 +80,32 @@ function renderImg(index) {
   // document.querySelector("#app").style.filter = "blur(10px)";
 }
 
-function arrowNav() {
+function arrowNav(index) {
   document.querySelectorAll(".navBtn").forEach((el) => {
     el.addEventListener("click", function (e) {
+      console.log(e.target);
       switch (e.target.alt) {
         case "prev": {
           console.log("prev");
+          if (index >= 0) {
+            console.log("PREV if part");
+            selectedImg.setAttribute("src", imgs[index--].src);
+          } else {
+            index = imgs.length - 1;
+            console.log("PREV else part");
+            // selectedImg.setAttribute("src", imgs[imgs.length - 1].src);
+          }
           break;
         }
-
         case "next": {
           console.log("next");
+          if (index < imgs.length) {
+            console.log("NEXT if part");
+            selectedImg.setAttribute("src", imgs[index++].src);
+          } else {
+            console.log("NEXT else part");
+            index = 0;
+          }
           break;
         }
       }
